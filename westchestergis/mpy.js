@@ -17,6 +17,7 @@ marker.addTo(map);
 var mly = new Mapillary.Viewer('mly',
                                'cjJ1SUtVOEMtdy11b21JM0tyYTZIQTo2ZmVjNTQ3YWQ0OWI2Yjgx',
                                '6RU1eOMyUy9XDRJ_87esEA', {cover: false});
+mly.setRenderMode(Mapillary.RenderMode.Fill);
 
 var trails = new L.GeoJSON.AJAX("trails.geojson");
 trails.addTo(map);
