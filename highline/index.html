@@ -1,4 +1,3 @@
-<!DOCTYPE HTML>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -43,7 +42,7 @@
         <script>
          var map = L.map('map').setView([0, 0], 10)
 
-             var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+         var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
          var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
          var osm = new L.TileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib})
              map.addLayer(osm)
@@ -76,8 +75,9 @@
 
              var mly = new Mapillary
          .Viewer('mly',
-                 'cjJ1SUtVOEMtdy11b21JM0tyYTZIQTo2ZmVjNTQ3YWQ0OWI2Yjgx',  // Replace this with your own ClientID
-                 'ZFt7ut4Z7g415vc6Gb-MIg')
+                 'cjJ1SUtVOEMtdy11b21JM0tyYTZIQTo2ZmVjNTQ3YWQ0OWI2Yjgx',
+                 'ZFt7ut4Z7g415vc6Gb-MIg',
+                 {cover: false})
 
              mly.on('nodechanged', function (node) {
                  var latLon = [node.latLon.lat, node.latLon.lon]
