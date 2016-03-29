@@ -14,7 +14,6 @@ function transformToAssocArray( prmstr ) {
 }
 
 var params = getSearchParameters();
-
 var key = 'NwHRc_WkIkPHbCAJohIlZA';
 
 if (params.key) {

@@ -37,8 +37,6 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibWFwaWxsYXJ5IiwiYSI6ImNpanB0NmN1bDAwOTF2dG03e
 var map = new mapboxgl.Map({
     container: 'map', // container id
     style: 'mapbox://styles/mapbox/streets-v8', //stylesheet location
-    center: [12.689836318219475, 56.04958221173251], // starting position
-    zoom: 12 // starting zoom
 })
 
 var markerSource = {
@@ -46,12 +44,8 @@ var markerSource = {
     data: {
         type: 'Feature',
         geometry: {
-            type: 'Point',
-            coordinates: [12.689836318219475, 56.04958221173251]
-        },
-        properties: {
-            title: 'You\'re here!',
-            'marker-symbol': 'marker'
+            type: 'MultiLineString',
+            coordinates: []
         }
     }
 }
@@ -116,5 +110,5 @@ mly.on('nodechanged', function (node) {
         }
     })
     map.getSource('markers').setData(tempSource._data)
-    map.flyTo({center: lnglat, zoom: 15})
+    map.jumpTo({center: lnglat, zoom: 15})
 })
