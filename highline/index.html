@@ -79,7 +79,7 @@
          .Viewer('mly',
                  'cjJ1SUtVOEMtdy11b21JM0tyYTZIQTo2ZmVjNTQ3YWQ0OWI2Yjgx',
                  'ZFt7ut4Z7g415vc6Gb-MIg',
-                 {cover: false})
+                 {cover: false, baseImageSize: Mapillary.ImageSize.Size2048, maxImageSize: Mapillary.ImageSize.Size2048})
 
              mly.on('nodechanged', function (node) {
                  var latLon = [node.latLon.lat, node.latLon.lon]
