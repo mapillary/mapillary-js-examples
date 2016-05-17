@@ -28,6 +28,5 @@ var mly = new Mapillary.Viewer(
         "cover": false,
         "baseImageSize": Mapillary.ImageSize.Size2048,
         "maxImageSize": Mapillary.ImageSize.Size2048,
+        "renderMode": Mapillary.RenderMode.Fill,
     });
-
-mly.setRenderMode(Mapillary.RenderMode.Fill);
