@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>mapillary-js + Leaflet.js example</title>
+        <link rel="stylesheet" href="https://npmcdn.com/mapillary-js@1.1.0/dist/mapillary-js.min.css">
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
+        <style>
+         body {
+             margin: 0;
+             padding: 0;
+             width: 100%;
+             height: 100%;
+         }
+         .mly-wrapper {
+             position: relative;
+             background-color: grey;
+             width: 100%;
+             height: 100%;
+         }
+         .mapillary-js {
+             position: relative;
+             height: 100%;
+             width: 66%;
+         }
+         #map {
+             position: absolute;
+             width: 34%;
+             top: 0;
+             right: 0;
+             bottom: 0;
+             z-index: 100;
+         }
+        </style>
+    </head>
+    <body>
+        <div class="mly-wrapper">
+            <div id="map"></div>
+            <div id="mly"></div>
+        </div>
+        <script src="//cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+        <script src="//spatialserver.github.io/Leaflet.MapboxVectorTile/dist/Leaflet.MapboxVectorTile.js"></script>
+
+        <script src="https://npmcdn.com/mapillary-js@1.1.0/dist/mapillary-js.min.js"></script>
+        <script>
+         var map = L.map('map').setView([0, 0], 10)
+
+         var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+         var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+         var osm = new L.TileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib})
+             map.addLayer(osm)
+
+
+             var mlyVectorLayerConfig = {
+                 url: 'https://d2munx5tg0hw47.cloudfront.net/tiles/{z}/{x}/{y}.mapbox',
+                 maxZoom: 18,
+                 style: function (feature) {
+                     var style = {}
+                     style.color = 'rgba(0, 255, 0, 0.7)'
+                     style.size = 3
+
+                     return style
+                 }
+             }
+
+         var mvtSource = new L.TileLayer.MVTSource(mlyVectorLayerConfig)
+             map.addLayer(mvtSource)
+
+             var marker
+
+         var latLon = [40.747, -74.005]
+         map.setView(latLon, 15)
+             marker = L.marker({
+                 lat: latLon[0],
+                 lon: latLon[1]
+             })
+             marker.addTo(map)
+
+             var mly = new Mapillary
+         .Viewer('mly',
+                 'cjJ1SUtVOEMtdy11b21JM0tyYTZIQTo2ZmVjNTQ3YWQ0OWI2Yjgx',
+                 'ZFt7ut4Z7g415vc6Gb-MIg',
+                 {cover: false, baseImageSize: Mapillary.ImageSize.Size2048, maxImageSize: Mapillary.ImageSize.Size2048})
+
+             mly.on('nodechanged', function (node) {
+                 var latLon = [node.latLon.lat, node.latLon.lon]
+                 map.setView(latLon, 15)
+
+                     if (!marker) {
+                         marker = L.marker(node.latLon).addTo(map)
+                     } else {
+                         marker.setLatLng(node.latLon)
+                     }
+             })
+        </script>
+    </body>
+</html>
+

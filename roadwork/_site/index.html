@@ -1,0 +1,65 @@
+<DOCTYPE html>
+<html>
+  <head>
+    <title>Roadwork test</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+    <style>
+      html, body, #map {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+	}
+      div.cartodb-popup.header.v2.header{
+	width:320px !important;
+	}
+      .leaflet-container a { 
+    	color: #fff !important:;
+	text-decoration: none;
+	}
+    </style>
+    <link rel="stylesheet" href="http://libs.cartodb.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <script type="infowindow/html" id="infowindow_template">
+        <div class="cartodb-popup header green v2" style="width:360px !important;">
+          <a href="#close" class="cartodb-popup-close-button close">x</a>
+          <div class="cartodb-popup-header">
+            <h1>Capture Time: {{capture_time}}</h1>
+          </div>
+          <div class="cartodb-popup-content-wrapper">
+                <div class="cartodb-popup-content">
+              <p><iframe src={{mapillary_fill}}></iframe></p>
+	      <h4><a href={{mapillary_link}} target="_blank">View On Mapillary</a></h4>	
+            </div>
+          </div>
+          <div class="cartodb-popup-tip-container">
+          </div>
+        </div>
+    </script>
+
+    <script src="http://libs.cartodb.com/cartodb.js/v3/3.15/cartodb.js"></script>
+
+    <script>
+      function main() {
+        cartodb.createVis(map, 'https://janine.cartodb.com/api/v2/viz/e7830306-286c-11e6-a307-0e98b61680bf/viz.json')
+         .on('done', function(vis,layers) {
+           // get sublayer 0 and set the infowindow template
+           var sublayer = layers[1].getSubLayer(0);
+
+           sublayer.infowindow.set('sanitizeTemplate',false);
+
+           sublayer.infowindow.set('template', $('#infowindow_template').html());
+          }).on('error', function() {
+            console.log("some error occurred");
+          });
+      }
+
+      window.onload = main;
+    </script>
+  </body>
+</html>
+
