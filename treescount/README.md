@@ -10,7 +10,7 @@ By visualizing the dataset in photos; we can:
 
 As a bonus, this can be part of an effort to create more comprehensive and current street level photo coverage of NYC. This community-based dataset that **can be licensed** for other use by NYC Parks and other agencies. Over time, Mapillary's automated detection tools will be able to recognize more objects within the imagery(trees, buidlings,sidewalk conditions) to help with park operations.  
 
-Try the ArcGIS example [here](). (The NYC Treescount 2015 Blockfaces data is quite large and takes some time to load up. Sorry! Screenshots and video below. 
+Try the ArcGIS example [here](http://webappbuilder.mapillary.io/webappbuilder/apps/9/).  The NYC Treescount 2015 Blockfaces dataset is quite large and takes some time to load up. Sorry! For instant gratification, screenshots and link to a video are below.   
 
 ![treescount1](treescount1.png)
 
