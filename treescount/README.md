@@ -2,7 +2,7 @@
 
 The Mapillary viewer is an easy way to observe, verify, and update geospatial datasets using street-level imagery. [Mapillary](http://www.mapillary.com) is a computer vision platform  which stitches together photos taken with any device (smartphones, action cameras, 360 cameras) into street level imagery for extracting geospatial data.  This new approach to Street View empowers governments and citizens to participate in collecting and visualizing geospatial data together.   
 
-This example shows how the NYC Treescount 2015 dataset can be viewed using the Mapillary viewer embedded in an ArcGIS webmap.
+This example shows how the NYC Treescount 2015 dataset can be viewed using the Mapillary viewer embedded in an ArcGIS webmap (created using @geeknixta's Treescount 2015 layer).
 By visualizing the dataset in photos, we can:
 - give community stewardship volunteers better visual tools to engage with the data
 - target and prioritize efforts to update the dataset where it looks outdated
