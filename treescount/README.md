@@ -8,13 +8,13 @@ By visualizing the dataset in photos, we can:
 - target and prioritize efforts to update the dataset where it looks outdated
 - motivate more volunteers to capture their own photos to create fresh street level imagery to update the data
 
-As a bonus, this can be part of an effort to create more comprehensive and current street level photo coverage of NYC. This community-based dataset **can be licensed** for other use by NYC Parks and other agencies. Over time, Mapillary's automated detection tools will be able to recognize more objects within the imagery (trees, buidlings,sidewalk conditions) to help with park operations.  
+As a bonus, this can be part of an effort to create more comprehensive and current street level photo coverage of NYC. This community-based dataset **can be licensed** for other use by NYC Parks and other agencies. Over time, Mapillary's automated detection tools will recognize more objects within the imagery (trees, buildings, sidewalk conditions) to help with park operations.  
 
 Try the ArcGIS example [here](http://webappbuilder.mapillary.io/webappbuilder/apps/9/).  The NYC Treescount 2015 dataset is quite large and takes some time to load up. Sorry! For instant gratification, screenshot and link to a video are below.   
 
 ![treescount](treescount.png)
 
-Very short video: https://dl.dropboxusercontent.com/u/150338781/trees.mp4
+Very short video: https://dl.dropboxusercontent.com/u/150338781/treescount.mp4
 
 Note:  This example happens to use the existing Mapillary for ArcGIS widget; the Mapillary viewer is a simple JS library that can be integrated with any map platform (see more docs and examples [here](http://mapillary.github.io/mapillary-js/)).
 
