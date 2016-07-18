@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mapillary Embed Wizard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://npmcdn.com/mapillary-js@1.4.1/dist/mapillary-js.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://npmcdn.com/mapillary-js@1.4.1/dist/mapillary-js.min.js" type="text/javascript"></script>
+    <script src="script.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="viewer-preview">
+        <iframe id="preview" src="https://kingofirony.github.io/fill/index.html"></iframe>
+    </div>
+    <div id="options-menu">
+        <h1>Mapillary Embed Wizard</h1>
+        <hr>
+        <br>
+
+        <form class="pure-form">
+            <div class="tooltip">
+                <input type="text" id="startImage" placeholder="Start Image">
+                <span class="tooltiptext">Use the 22-digit string of characters in the URL of the photo you’d like to start from</span></div>
+            <br>
+            <br>
+            <div class="tooltip">
+                <input type="text" id="clientId" placeholder="Mapillary Client id">
+                <span class="tooltiptext">Get a unique identifier for your embed <a href="http://www.mapillary.com/map/settings/integrations/new" target="_blank">here</a></span></div>
+            <br>
+            <br>
+            <h4 id="show-advanced"> Click for Advanced Settings</h4>
+
+            <div id="advanced">
+                <select id="map-type" class="hide">
+                    <option value="2">MapboxGl </option>
+                    <option value="0">No Map</option>
+                    <option value="1">Mapzen Tangram</option>
+                    <option value="3">Leaflet</option>
+                </select>
+                <br>
+                <br>
+                <select id="img-size" class="hide">
+                    <option value="2048">Large: 2048 px (default)</option>
+                    <option value="1024">Medium: 1024 pixels</option>
+                    <option value="640">Small: 640 pixels</option>
+                    <option value="320">Extra Small: 320 pixels</option>
+                </select>
+
+                <br>
+                <br>
+                <select id="render-mode" class="hide">
+                    <option value="2">Displays all content within the viewer.</option>
+                    <option value="1">Fill the viewer by cropping content.</option>
+                </select>
+                <br>
+                <br>
+                <div id="checkboxes">
+                    <label for="attribution" class="pure-checkbox hide">
+                        <input id="attribution" type="checkbox" checked> Attribution to the Photographer
+                    </label>
+
+                    <label for="arrows" class="pure-checkbox hide">
+                        <input id="arrows" type="checkbox" checked> Arrows to Navigate
+                    </label>
+
+                    <label for="sequence" class="pure-checkbox hide">
+                        <input id="sequence" type="checkbox" checked> Play Button
+                    </label>
+
+                    <label for="cover" class="pure-checkbox hide ">
+                        <input id="cover" type="checkbox" checked> Display Thumbnail on on Page Load
+                    </label>
+                </div>
+            </div>
+            <br>
+            <button class="pure-button" id="render" type="button">Preview</button>
+            <button class="pure-button pure-button pure-button-disabled" id="snippet" type="button">Get Code Snippet</button>
+            <br>
+            <br>
+        </form>
+
+    </div>
+    <div id="snippet-box">
+        <h3> Copy and paste the following text into your html.</h3>
+        <textarea id="snippet-view" class="pure-input-1-2">
+        </textarea>
+        <p id="close-window"> Close Window</p>
+    </div>
+</body>
+
+</html>
