@@ -40,7 +40,7 @@ $(document).ready(function() {
         } else if (clientId == "") {
             alert("You must enter a Client ID. ")
         } else {
-            var source = 'https://mapillary.github.io/mapillary-js-examples/fill2/index.html?' +
+            var source = 'http://mapillary.github.io/mapillary-js-examples/fill2/index.html?' +
                 'key=' +
                 startImage +
                 '&attribution=' +
