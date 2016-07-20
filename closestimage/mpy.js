@@ -33,5 +33,6 @@ $.ajax({
   crossDomain: true
 }).done(function(data ) {
   $('body').append("<img id\=\"image\" src=\"" + "https:\/\/d1cuyjsrcm0gby.cloudfront.net\/" +  data.ims[0].key + "/thumb-2048.jpg" + "\">") ;
-  $("#image").width(params.width)
+  $("#image").width(params.width);
+  $("#image").css("-webkit-user-select", "none");
 });
