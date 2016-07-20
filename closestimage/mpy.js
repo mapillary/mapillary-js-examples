@@ -32,8 +32,7 @@ $.ajax({
   url: requestString ,
   crossDomain: true
 }).done(function(data ) {
-  document.location.href = "https:\/\/d1cuyjsrcm0gby.cloudfront.net\/" +  data.ims[0].key + "/thumb-2048.jpg";
   $('body').append("<img  src=\"" + "https:\/\/d1cuyjsrcm0gby.cloudfront.net\/" +  data.ims[0].key + "/thumb-2048.jpg" + "\">") ;
-  //$("img").width(params.width);
+  $("img").width(params.width);
   $("img").css("-webkit-user-select", "none");
 });
