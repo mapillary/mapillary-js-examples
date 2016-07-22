@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mapillary Carto Wizard</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css	">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="script.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div id="title">
+        <h1>Add Mapillary Views to Your Carto Map</h1>
+        <h2>Enter your geojson in the box below.</h2>
+    </div>
+    <textarea id="geojson-input" class="pure-input-1-2">
+    </textarea>
+
+    <div id="instructions">
+        <ol>
+            <li>Login at <a id="cartolink" href="http://carto.com" target="_blank">carto.com.</a> </li>
+            <li>Click maps in the top right corner near your user icon. </li>
+            <li>Click <b>New Map</b> in the top right corner. </li>
+            <li>Click <b>Connect Data</b> in the tab bar.</li>
+            <li>Drag and drop your downloaded geojson file into the browser window and click the Connect Dataset button.</li>
+            <li>Wait for the geojson to import and a map will load.</li>
+            <li>Just like any other carto map you’re going to need to select which fields you want to show when a point is clicked on. Click any visibile point on the map and click the select fields link. Make sure that you check the field labeled mapillary_fill.</li>
+            <li>Click the publish link in the top right most corner and copy the link in the field labeled CartoDB.js. It has a purple circle with tools in it.</li>
+            <li> Paste the link in the following box< /li>
+        </ol>
+        <form class="pure-form">
+            <input type="text" id="cartojslink" placeholder="Paste Map Here">
+
+            <button class="pure-button" id="done-button" type="button">Done</button>
+            <a id="downloadhtml" class="myButton" download="" href="#">Download HTML file</a>
+        </form>
+
+    </div>
+    <div id="functions">
+        <button class="pure-button" id="add-iframes" type="button">Add Mapillary Viewers</button>
+        <a id="export" class="myButton" download="" href="#">Download New GeoJson</a>
+    </div>
+
+</body>
+
+
+
+</html>

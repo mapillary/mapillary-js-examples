@@ -1,0 +1,45 @@
+#geojson-input {
+    position: absolute;
+    width: 80%;
+    height: 50%;
+    left: 10%;
+    top: 20%;
+}
+
+body {
+    background-color: #242528;
+}
+h2 {
+    color: white;
+    font-weight: lighter;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+h1 {
+    color: white;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#title {
+    position: absolute;
+    left: 10%;
+}
+#functions {
+    position: absolute;
+    left: 10%;
+    bottom: 20%;
+}
+#functions a {
+    display: none;
+}
+#instructions {
+    display: none;
+    color: white;
+    position: absolute;
+    top: 20%;
+    width: 80%;
+    left: 10%;
+    font-size: 1.5em;
+    font-weight: lighter;
+}
+input {
+    color: black;
+}
