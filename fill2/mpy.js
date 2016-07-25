@@ -57,12 +57,11 @@ if (params.key && params.cover &&
         default:
             imgSize = Mapillary.ImageSize.Size2048;
     }
-
     switch (params.renderMode) {
-        case 1:
+        case "1":
             renderMode = Mapillary.RenderMode.Fill
             break;
-        case 2:
+        case "2":
             renderMode = Mapillary.RenderMode.LetterBox;
             break;
         default:
