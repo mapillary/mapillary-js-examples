@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <title>Mapillary Carto Widget</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link rel="stylesheet" href="https://npmcdn.com/mapillary-js@1.6.0/dist/mapillary-js.min.css">
+    <script src='api.js'></script>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://npmcdn.com/mapillary-js@1.6.0/dist/mapillary-js.min.js"></script>
+    <script src="script.js"></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="loader"></div>
+    <div id="map_contents">
+        <img class="LogoBlack" src="./mapillary_logo_black.svg"></img>
+        <div class="mly-wrapper">
+            <h5 class="unselectable" id="minimize">-</h5>
+            <h5 class="unselectable" id="maxamize">+</h5>
+            <h3 class="unselectable">Mapillary Viewer</h3>
+            <div class="verticalLine">
+            </div>
+            <div id='mly'></div>
+        </div>
+        <div id='map'></div>
+    </div>
+</body>
+
+</html>
