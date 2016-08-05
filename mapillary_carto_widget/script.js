@@ -5,7 +5,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibWFwaWxsYXJ5IiwiYSI6ImNpanB0NmN1bDAwOTF2dG03e
 
 $(".loader").show();
 
-$.getJSON('https://' + username +'.carto.com/api/v2/sql?format=GeoJSON&q=' + sql_statement, function(data) {
+$.getJSON('https://' + username + '.carto.com/api/v2/sql?format=GeoJSON&q=' + sql_statement, function(data) {
     TYPE = data.features[0].geometry.type;
 
     if (TYPE == "MultiLineString" || TYPE == "LineString") {
@@ -70,12 +70,15 @@ $.getJSON('https://' + username +'.carto.com/api/v2/sql?format=GeoJSON&q=' + sql
                 "type": "circle",
                 "source": "points",
                 'paint': {
-          'circle-radius': {
-              'base': 2,
-              'stops': [[10, 2], [22, 180]]
-          },
-          'circle-color':'#ffa500'
-        }
+                    'circle-radius': {
+                        'base': 2,
+                        'stops': [
+                            [10, 2],
+                            [22, 180]
+                        ]
+                    },
+                    'circle-color': '#ffa500'
+                }
             });
         }
 
@@ -110,7 +113,8 @@ $.getJSON('https://' + username +'.carto.com/api/v2/sql?format=GeoJSON&q=' + sql
                 'text-offset': [0, 0.6],
                 'text-anchor': 'top',
                 "icon-size": 1
-            }})
+            }
+        })
 
         map.on('click', function(e) {
             var features = map.queryRenderedFeatures(e.point, {
@@ -125,8 +129,8 @@ $.getJSON('https://' + username +'.carto.com/api/v2/sql?format=GeoJSON&q=' + sql
                     center: features[0].geometry.coordinates
                 });
                 lastFeature = [e.lngLat.lat, e.lngLat.lng];
-                if($(".mly-wrapper").is(":visible")){
-                mly.moveCloseTo(e.lngLat.lat, e.lngLat.lng);
+                if ($(".mly-wrapper").is(":visible")) {
+                    mly.moveCloseTo(e.lngLat.lat, e.lngLat.lng);
                 }
 
                 var descriptionString = "<div id=\"properties\">";
@@ -155,9 +159,10 @@ $.getJSON('https://' + username +'.carto.com/api/v2/sql?format=GeoJSON&q=' + sql
                     center: featureCenter
                 });
                 lastFeature = [e.lngLat.lat, e.lngLat.lng];
-                if($(".mly-wrapper").is(":visible")){
-                mly.moveCloseTo(e.lngLat.lat, e.lngLat.lng);
-                }                var descriptionString = "<div id=\"properties\">";
+                if ($(".mly-wrapper").is(":visible")) {
+                    mly.moveCloseTo(e.lngLat.lat, e.lngLat.lng);
+                }
+                var descriptionString = "<div id=\"properties\">";
                 for (var k in features[0].properties) {
                     if (features[0].properties.hasOwnProperty(k) && k != 'icon' && k != 'cartodb_id') {
                         descriptionString += "<h4>" + k + "<\/h4>" + features[0].properties[k] + "<hr>";
@@ -175,9 +180,9 @@ $.getJSON('https://' + username +'.carto.com/api/v2/sql?format=GeoJSON&q=' + sql
                     center: features[0].geometry.coordinates[0][0]
                 });
                 lastFeature = [e.lngLat.lat, e.lngLat.lng];
-                if($(".mly-wrapper").is(":visible")){
-                mly.moveCloseTo(e.lngLat.lat, e.lngLat.lng);
-              }
+                if ($(".mly-wrapper").is(":visible")) {
+                    mly.moveCloseTo(e.lngLat.lat, e.lngLat.lng);
+                }
                 var descriptionString = "<div id=\"properties\">";
                 for (var k in features[0].properties) {
                     if (features[0].properties.hasOwnProperty(k) && k != 'icon' && k != 'cartodb_id') {
@@ -195,9 +200,10 @@ $.getJSON('https://' + username +'.carto.com/api/v2/sql?format=GeoJSON&q=' + sql
                     center: [e.lngLat.lng, e.lngLat.lat]
                 });
                 lastFeature = [e.lngLat.lat, e.lngLat.lng];
-                if($(".mly-wrapper").is(":visible")){
-                mly.moveCloseTo(e.lngLat.lat, e.lngLat.lng);
-                }            }
+                if ($(".mly-wrapper").is(":visible")) {
+                    mly.moveCloseTo(e.lngLat.lat, e.lngLat.lng);
+                }
+            }
         });
     });
 });
@@ -245,112 +251,121 @@ function instantiateMap(center) {
     })
 }
 
-$( document ).ready(function() {
-$(".LogoBlack").click(function() {
-    $(".LogoBlack").fadeOut("slow");
-    $(".mly-wrapper").fadeIn("slow");
-    mly.resize();
-
-
-    var mapillarySource = {
-        type: 'vector',
-        tiles: ['https://d2munx5tg0hw47.cloudfront.net/tiles/{z}/{x}/{y}.mapbox'],
-        minzoom: 0,
-        maxzoom: 16
-    }
-    map.addSource('mapillary', mapillarySource)
-
-    map.addLayer({
-        'id': 'mapillary',
-        'type': 'line',
-        'source': 'mapillary',
-        'source-layer': 'mapillary-sequences',
-        'layout': {
-            'line-cap': 'round',
-            'line-join': 'round'
-        },
-        'paint': {
-            'line-opacity': 0.6,
-            'line-color': 'rgb(53, 175, 109)',
-            'line-width': 4
-        }
-    }, 'markers')
-    map.stop()
-    map.setZoom(15.5);
-    if(lastFeature) {
-      mly.moveCloseTo(lastFeature[0], lastFeature[1]);
-    } else {
-      mly.moveCloseTo(center[1], center[0]);
-    }
-});
-
-$("#minimize").click(function() {
-    $(".LogoBlack").fadeIn("slow");
-    $(".mly-wrapper").fadeOut("slow");
-    map.removeLayer("mapillary");
-    map.removeSource("mapillary");
-});
-
-$("#maxamize").click(function() {
-      if($('.mly-wrapper').css("height") == "600px") {
-
-          $('.mly-wrapper').css("height", 377 + "px");
-          $('.mly-wrapper').css("width", 300 + "px");
-          $('.mapillary-js').css("width", 300+ "px");
-          $('.mapillary-js').css("height", 319 + "px");
-          mly.resize();
-
-      } else {
-        $('.mly-wrapper').css("height", 600 + "px");
-        $('.mly-wrapper').css("width", 600 + "px");
-        $('.mapillary-js').css("width", 600+ "px");
-        $('.mapillary-js').css("height", 520 + "px");
+$(document).ready(function() {
+    $(".LogoBlack").click(function() {
+        $(".LogoBlack").fadeOut("slow");
+        $(".mly-wrapper").fadeIn("slow");
         mly.resize();
-      }
-});
 
-(function($) {
-    function startTrigger(e) {
-        var $elem = $(this);
-        $elem.data('mouseheld_timeout', setTimeout(function() {
-            $elem.trigger('mouseheld');
-        }, e.data));
-    }
 
-    function stopTrigger() {
-        var $elem = $(this);
-        clearTimeout($elem.data('mouseheld_timeout'));
-    }
+        var mapillarySource = {
+            type: 'vector',
+            tiles: ['https://d2munx5tg0hw47.cloudfront.net/tiles/{z}/{x}/{y}.mapbox'],
+            minzoom: 0,
+            maxzoom: 16
+        }
+        map.addSource('mapillary', mapillarySource)
 
-    var mouseheld = $.event.special.mouseheld = {
-        setup: function(data) {
-            var $this = $(this);
-            $this.bind('mousedown', +data || mouseheld.time, startTrigger);
-            $this.bind('mouseleave mouseup', stopTrigger);
-        },
-        teardown: function() {
-            var $this = $(this);
-            $this.unbind('mousedown', startTrigger);
-            $this.unbind('mouseleave mouseup', stopTrigger);
-        },
-        time: 200
-    };
-})($);
-
-$(".mly-wrapper").bind('mouseheld', function(e) {
-    $(document).on("mousemove", function(event) {
-        var winWidth = $(window).width();
-        var winHeight = $(window).height();
-
-        $('.mly-wrapper').css("left", (event.pageX) + "px");
-        $('.mly-wrapper').css("bottom", (winHeight - event.pageY - 350) + "px");
-        $('.mapillary-js').css("left", ((event.pageX) + 3) + "px");
-        $('.mapillary-js').css("bottom", (winHeight - event.pageY - 347) + "px");
-
-        $(document).on("mouseup", function(event) {
-            $(document).unbind("mousemove");
-        });
-
+        map.addLayer({
+            'id': 'mapillary',
+            'type': 'line',
+            'source': 'mapillary',
+            'source-layer': 'mapillary-sequences',
+            'layout': {
+                'line-cap': 'round',
+                'line-join': 'round'
+            },
+            'paint': {
+                'line-opacity': 0.6,
+                'line-color': 'rgb(53, 175, 109)',
+                'line-width': 4
+            }
+        }, 'markers')
+        map.stop()
+        map.setZoom(15.5);
+        if (lastFeature) {
+            mly.moveCloseTo(lastFeature[0], lastFeature[1]);
+        } else {
+            mly.moveCloseTo(center[1], center[0]);
+        }
     });
-})
+
+    $("#minimize").click(function() {
+        if ($('.mly-wrapper').css("height") == "600px") {
+            $('.mly-wrapper').css("height", 377 + "px");
+            $('.mly-wrapper').css("width", 300 + "px");
+            $('.mapillary-js').css("width", 300 + "px");
+            $('.mapillary-js').css("height", 319 + "px");
+            mly.resize();
+
+        } else {
+            $(".LogoBlack").fadeIn("slow");
+            $(".mly-wrapper").fadeOut("slow");
+            map.removeLayer("mapillary");
+            map.removeSource("mapillary");
+        }
+    });
+
+    $("#maxamize").click(function() {
+        if ($('.mly-wrapper').css("height") == "600px") {
+
+            $('.mly-wrapper').css("height", 377 + "px");
+            $('.mly-wrapper').css("width", 300 + "px");
+            $('.mapillary-js').css("width", 300 + "px");
+            $('.mapillary-js').css("height", 319 + "px");
+            mly.resize();
+
+        } else {
+            $('.mly-wrapper').css("height", 600 + "px");
+            $('.mly-wrapper').css("width", 600 + "px");
+            $('.mapillary-js').css("width", 600 + "px");
+            $('.mapillary-js').css("height", 520 + "px");
+            mly.resize();
+        }
+    });
+
+    (function($) {
+        function startTrigger(e) {
+            var $elem = $(this);
+            $elem.data('mouseheld_timeout', setTimeout(function() {
+                $elem.trigger('mouseheld');
+            }, e.data));
+        }
+
+        function stopTrigger() {
+            var $elem = $(this);
+            clearTimeout($elem.data('mouseheld_timeout'));
+        }
+
+        var mouseheld = $.event.special.mouseheld = {
+            setup: function(data) {
+                var $this = $(this);
+                $this.bind('mousedown', +data || mouseheld.time, startTrigger);
+                $this.bind('mouseleave mouseup', stopTrigger);
+            },
+            teardown: function() {
+                var $this = $(this);
+                $this.unbind('mousedown', startTrigger);
+                $this.unbind('mouseleave mouseup', stopTrigger);
+            },
+            time: 200
+        };
+    })($);
+
+    $(".mly-wrapper").bind('mouseheld', function(e) {
+        $(document).on("mousemove", function(event) {
+            var winWidth = $(window).width();
+            var winHeight = $(window).height();
+
+            $('.mly-wrapper').css("left", (event.pageX) + "px");
+            $('.mly-wrapper').css("bottom", (winHeight - event.pageY - 350) + "px");
+            $('.mapillary-js').css("left", ((event.pageX) + 3) + "px");
+            $('.mapillary-js').css("bottom", (winHeight - event.pageY - 347) + "px");
+
+            $(document).on("mouseup", function(event) {
+                $(document).unbind("mousemove");
+            });
+
+        });
+    })
 });
