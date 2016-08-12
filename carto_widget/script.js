@@ -1,6 +1,7 @@
 var CLIENT_ID = 'c2tuaFJiMHdTN3dleXRrWF9KMExYZzpjZmJmZTY5ZjExYTg5OWY5';
-var map, marker, visible;
+var map, marker, visible, shown;
 visible = false;
+shown = false;
 
 function main() {
     var sql_statement = "SELECT * FROM " + table;
@@ -51,30 +52,30 @@ function main() {
 
 
         map.on('click', function(e) {
-          if(visible){
-            if(!marker) {
-              marker = L.marker([51.5, -0.09]).addTo(map);
-            }
-            var lat = e.latlng.lat;
-            var lon = e.latlng.lng;
-            var radius = 5000;
-            var requestString = "https:\/\/a.mapillary.com\/v2\/search\/im\/close?client_id=" +
-                CLIENT_ID +
-                "&lat=" + lat +
-                "&limit=1&lon=" + lon +
-                "&distance=" + radius;
-            $.ajax({
-                "url": requestString,
-                "crossDomain": true,
-                "success": function(data) {;
-                    if (data.ims.length) {
-                        $('.loader').show()
-                       marker.setLatLng(L.latLng(data.ims[0].lat, data.ims[0].lon));
-                        mly.moveCloseTo(data.ims[0].lat, data.ims[0].lon);
-                    }
+            if (visible) {
+                if (!marker) {
+                    marker = L.marker([51.5, -0.09]).addTo(map);
                 }
-            });
-          }
+                var lat = e.latlng.lat;
+                var lon = e.latlng.lng;
+                var radius = 5000;
+                var requestString = "https:\/\/a.mapillary.com\/v2\/search\/im\/close?client_id=" +
+                    CLIENT_ID +
+                    "&lat=" + lat +
+                    "&limit=1&lon=" + lon +
+                    "&distance=" + radius;
+                $.ajax({
+                    "url": requestString,
+                    "crossDomain": true,
+                    "success": function(data) {;
+                        if (data.ims.length) {
+                            $('.loader').show()
+                            marker.setLatLng(L.latLng(data.ims[0].lat, data.ims[0].lon));
+                            mly.moveCloseTo(data.ims[0].lat, data.ims[0].lon);
+                        }
+                    }
+                });
+            }
         });
     });
     var mapillary;
@@ -91,8 +92,8 @@ function main() {
         mly.on('nodechanged', function(node) {
             mly.resize();
             $('.loader').hide()
-          var lnglat = [node.latLon.lon, node.latLon.lat]
-           marker.setLatLng(L.latLng(node.latLon.lat, node.latLon.lon));
+            var lnglat = [node.latLon.lon, node.latLon.lat]
+            marker.setLatLng(L.latLng(node.latLon.lat, node.latLon.lon));
 
         });
         mly.on('loadingchanged', function(node) {
@@ -109,7 +110,10 @@ function main() {
     $(".LogoBlack").click(function() {
         $(".LogoBlack").fadeOut("slow");
         $(".mly-wrapper").fadeIn("slow");
-        $("#snippet-box").fadeIn();
+        if(!shown) {
+          $("#snippet-box").fadeIn();
+          shown = true;
+        }
         mly.resize();
 
         var mlyVectorLayerConfig = {
@@ -196,7 +200,7 @@ function main() {
     });
 
     $('#close-window').click(function() {
-      $("#snippet-box").fadeOut("slow");
-  })
+        $("#snippet-box").fadeOut("slow");
+    })
 }
 window.onload = main;
