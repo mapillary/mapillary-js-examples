@@ -1,5 +1,6 @@
 var CLIENT_ID = 'c2tuaFJiMHdTN3dleXRrWF9KMExYZzpjZmJmZTY5ZjExYTg5OWY5';
-var map;
+var map, marker, visible;
+visible = false;
 
 function main() {
     var sql_statement = "SELECT * FROM " + table;
@@ -48,9 +49,12 @@ function main() {
             });
 
 
-        var marker = L.marker([51.5, -0.09]).addTo(map);
 
         map.on('click', function(e) {
+          if(visible){
+            if(!marker) {
+              marker = L.marker([51.5, -0.09]).addTo(map);
+            }
             var lat = e.latlng.lat;
             var lon = e.latlng.lng;
             var radius = 5000;
@@ -65,12 +69,12 @@ function main() {
                 "success": function(data) {;
                     if (data.ims.length) {
                         $('.loader').show()
-                        marker.setLatLng(L.latLng(data.ims[0].lat, data.ims[0].lon));
+                       marker.setLatLng(L.latLng(data.ims[0].lat, data.ims[0].lon));
                         mly.moveCloseTo(data.ims[0].lat, data.ims[0].lon);
                     }
                 }
             });
-
+          }
         });
     });
     var mapillary;
@@ -88,8 +92,8 @@ function main() {
             mly.resize();
             $('.loader').hide()
 
-            var lnglat = [node.latLon.lon, node.latLon.lat]
-            marker.setLatLng(L.latLng(node.latLon.lat, node.latLon.lon));
+           var lnglat = [node.latLon.lon, node.latLon.lat]
+           marker.setLatLng(L.latLng(node.latLon.lat, node.latLon.lon));
 
         });
         mly.on('loadingchanged', function(node) {
@@ -117,7 +121,7 @@ function main() {
         }
         mapillary = L.tileLayer("https://d2munx5tg0hw47.cloudfront.net/tiles/{z}/{x}/{y}.png", mlyVectorLayerConfig);
         map.addLayer(mapillary);
-
+        visible = true;
     });
 
 
@@ -172,6 +176,7 @@ function main() {
         $(".LogoBlack").fadeIn("slow");
         $(".mly-wrapper").fadeOut("slow");
         map.removeLayer(mapillary);
+        visible = false;
     });
 
     $("#maxamize").click(function() {
