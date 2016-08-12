@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mapillary Carto Image Wizard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="script.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div id="options-menu">
+        <h1>Mapillary Carto Image Wizard</h1>
+        <hr>
+        <br>
+
+        <form class="pure-form">
+            <div id='imgList'>
+                <div class="tooltip">
+                    <input type="text" class="image-key" placeholder="Image Key">
+                    <span class="tooltiptext">Use the 22-digit string of characters in the URL of the photo you’d like to put</span>
+                </div>
+                <br>
+            </div>
+            <h4 id="add-image">Add Another Image</h4>
+            <br>
+            <br>
+            <a class="pure-button pure-button" download="carto.geojson" id="geojson" type="button">Get GeoJson</a>
+            <br>
+            <br>
+        </form>
+
+    </div>
+</body>
+
+</html>
