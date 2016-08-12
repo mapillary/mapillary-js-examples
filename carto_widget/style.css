@@ -133,6 +133,27 @@ P {
     width: 49%;
     height: 10px;
 }
+
+#snippet-box {
+    display:none;
+    vertical-align: middle;
+    position: fixed;
+    height: 20%;
+    width: 40%;
+    top: 35%;
+    left: 30%;
+    z-index: 999;
+    background-color: white;
+    text-align: center;
+    font-weight: 200;
+    overflow-wrap: break-word;
+    -webkit-box-shadow: -1px 1px 100px 10000px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1px 1px 100px 10000px rgba(0, 0, 0, 0.75);
+    box-shadow: -1px 1px 100px 1000px rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 #properties {
     background-color: white;
     overflow-y: scroll;

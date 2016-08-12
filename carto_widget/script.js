@@ -91,8 +91,7 @@ function main() {
         mly.on('nodechanged', function(node) {
             mly.resize();
             $('.loader').hide()
-
-           var lnglat = [node.latLon.lon, node.latLon.lat]
+          var lnglat = [node.latLon.lon, node.latLon.lat]
            marker.setLatLng(L.latLng(node.latLon.lat, node.latLon.lon));
 
         });
@@ -107,12 +106,10 @@ function main() {
     var sql_statement = "SELECT * FROM " + table;
     var center;
 
-
-
-
     $(".LogoBlack").click(function() {
         $(".LogoBlack").fadeOut("slow");
         $(".mly-wrapper").fadeIn("slow");
+        $("#snippet-box").fadeIn();
         mly.resize();
 
         var mlyVectorLayerConfig = {
@@ -177,6 +174,7 @@ function main() {
         $(".mly-wrapper").fadeOut("slow");
         map.removeLayer(mapillary);
         visible = false;
+        map.removeLayer(marker);
     });
 
     $("#maxamize").click(function() {
@@ -196,5 +194,9 @@ function main() {
             mly.resize();
         }
     });
+
+    $('#close-window').click(function() {
+      $("#snippet-box").fadeOut("slow");
+  })
 }
 window.onload = main;
