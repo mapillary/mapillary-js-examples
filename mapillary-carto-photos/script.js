@@ -19,6 +19,8 @@ $(document).ready(function() {
 
 
 function generateGeoJSON(link) {
+    geojson.features = [];
+    imageKeys = [];
     $('.image-key').each(function() {
         if ($(this).val().length == 22) {
             imageKeys.push($(this).val());
@@ -46,14 +48,16 @@ function generateGeoJSON(link) {
                     "image": "https://d1cuyjsrcm0gby.cloudfront.net/" + data.key + "/thumb-2048.jpg"
                 }
             });
-            if (i == imageKeys.length) {
+
+            if (i == imageKeys.length && geojson.features.length == imageKeys.length) {
                 var element = document.createElement('a');
                 element.setAttribute('href', "data:text/plain;charset=UTF-8," + encodeURIComponent(JSON.stringify(geojson)));
                 element.setAttribute('download', "carto.json");
                 $("body").append(element);
                 element.click();
-                $(document).removeChild(element);
+                $(document).remove(element);
             }
-        });
+          });
+
+        }
     }
-}
