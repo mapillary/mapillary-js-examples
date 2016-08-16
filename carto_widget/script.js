@@ -34,7 +34,6 @@ function main() {
                 console.log(layer);
 
                 layer.on('featureClick', function(e, pos, latlng, data) {
-                    console.console.log();
                     (latlng);
                 });
 
@@ -179,6 +178,7 @@ function main() {
         map.removeLayer(mapillary);
         visible = false;
         map.removeLayer(marker);
+        marker = null;
     });
 
     $("#maxamize").click(function() {
