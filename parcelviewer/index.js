@@ -4,7 +4,7 @@ $(function() {
     mapboxgl.accessToken = 'pk.eyJ1IjoiY2JlZGRvdyIsImEiOiI5Q09YRG1RIn0.Izu6OPJ4CEEaSSpGuys3Xg';
     var map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v9',
+        style: 'mapbox://styles/mapbox/satellite-v9',
         center: [-82.69965,41.60116],
         zoom: 12
     });
@@ -27,7 +27,6 @@ $(function() {
             'id': 'parcels-layer',
             'type': 'fill',
             'source': 'parcels',
-            'source-layer': 'parcels-layer',
             'paint': {
                 'fill-color': 'rgba(200, 100, 240, 0.4)',
                 'fill-outline-color': 'rgba(200, 100, 240, 1)'
