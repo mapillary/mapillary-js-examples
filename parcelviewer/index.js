@@ -169,7 +169,7 @@ $(function() {
             zoom: 17,
         });
 
-        var url ="http://mapillary-magic.mapillary.io/v3/images?look_at[lon]=" + lng + "&look_at[lat]=" + lat + "&look_at[radius]=" + radius
+        var url ="https://a.mapillary.com/v3/images?look_at[lon]=" + lng + "&look_at[lat]=" + lat + "&look_at[radius]=" + radius + "&client_id=MkJKbDA0bnZuZlcxeTJHTmFqN3g1dzplMGFjODhmMzBjNjNiOWZi"
         $.ajax({
             dataType: "json",
             url: url,
