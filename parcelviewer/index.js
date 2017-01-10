@@ -39,7 +39,20 @@ $(function() {
         "UTZhSnNFdGpxSEFFREUwb01GYzlXZzpkMWM2YzdjYjQxN2FhM2Vh",
         null,
         {
-            cover: false
+            component: {
+                attribution: false,
+                cover: false,
+                direction: {
+                    distinguishSequence: true,
+                    maxWidth: 460,
+                    minWidth: 180
+                },
+                imagePlane: {
+                    imageTiling: true
+                },
+                stats: true
+            },
+            renderMode: Mapillary.RenderMode.Fill
         }
     );
     $("#mly-wrapper").hide();
@@ -59,29 +72,7 @@ $(function() {
             // Do nothing the layers just does not exists
         }
 
-        var geojson = {
-            features: [],
-            type: "FeatureCollection",
-        };
-
-        var items = data.images.i;
-        for (var i = 0; i < data.images.length; i++) {
-            var image = data.images[i];
-            var image_url = "https://d1cuyjsrcm0gby.cloudfront.net/{KEY}/thumb-320.jpg";
-
-            geojson.features.push({
-                "geometry":{
-                    "type": "Point",
-                    "coordinates": [image.lon, image.lat]
-                },
-                "properties":{
-                    "image": image.key,
-                },
-                type: "Feature"
-            });
-        };
-
-        map.addSource('points', { type: 'geojson', data: geojson });
+        map.addSource('points', { type: 'geojson', data: data });
 
         map.addLayer({
             "id": "points",
@@ -109,8 +100,9 @@ $(function() {
 
         el.append("<h3>Images looking at parcel</h3>");
 
-        data.images.forEach( function(image, i){
+        data.features.forEach( function(feature, i) {
             var row_name = "image-list-row-" + Math.floor(i / 3);
+            var image_key = feature.properties.key;
 
             if (i % 3 == 0) {
                 el.append($("<div class='row' id='" + row_name + "'></div>"));
@@ -118,27 +110,24 @@ $(function() {
 
             var image_el = $("<div class='four columns'></div>")
 
-            // "<a target=_blank href=https://www.mapillary.com/map/im/" + image.key + ">" + "<img src=https://d1cuyjsrcm0gby.cloudfront.net/" + image.key + "/thumb-320.jpg style=\"max-width:100%;max-height:100%\"></a>"
-
             image_el.append($(
-                "<img src=https://d1cuyjsrcm0gby.cloudfront.net/" + image.key + "/thumb-320.jpg style='cursor:pointer;max-width:100%;max-height:100%'>"
+                "<img src=https://d1cuyjsrcm0gby.cloudfront.net/" + image_key + "/thumb-320.jpg style='cursor:pointer;max-width:100%;max-height:100%'>"
             ));
 
             image_el.click(function(event) {
                 $("#mly-wrapper").show();
                 $("#image-list").hide();
-                console.log(image.key);
-                mly.moveToKey(image.key);
+                mly.moveToKey(image_key);
             });
 
             image_el.hover(
                 function() {
-                    map.setFilter("points-active", ["==", "image", image.key]);
-                    console.log("IN", image.key);
+                    map.setFilter("points-active", ["==", "image", image_key]);
+                    console.log("IN", image_key);
                 },
                 function() {
                     map.setFilter("points-active", ["==", "image", ""]);
-                    console.log("OUT", image.key);
+                    console.log("OUT", image_key);
                 }
             );
 
@@ -169,7 +158,7 @@ $(function() {
             zoom: 17,
         });
 
-        var url ="https://a.mapillary.com/v3/images?look_at[lon]=" + lng + "&look_at[lat]=" + lat + "&look_at[radius]=" + radius + "&client_id=MkJKbDA0bnZuZlcxeTJHTmFqN3g1dzplMGFjODhmMzBjNjNiOWZi"
+        var url ="https://a.mapillary.com/v3/images?lookat="+ lng + "," + lat + "&radius" + radius + "&client_id=MkJKbDA0bnZuZlcxeTJHTmFqN3g1dzplMGFjODhmMzBjNjNiOWZi"
         $.ajax({
             dataType: "json",
             url: url,
